@@ -30,8 +30,8 @@ Never put it in `wrangler.jsonc` or source control.
 The MCP endpoint is `/mcp`. Project-scoped clients must send both headers:
 `X-Conventions-Project` contains the absolute project path and
 `X-Conventions-Machine` contains the machine name. The Worker derives the
-project identifier as `<machine>:<path-id>`, preventing equal paths on two
-machines from sharing rules.
+project identifier as `<machine>:<absolute-path>`, preserving the complete
+directory string so slashes and hyphens cannot become ambiguous.
 
 ## Deployment
 

@@ -1,6 +1,6 @@
 export function projectFromPath(path: string | null): string | null {
     if (!path || !isAbsolutePath(path)) return null;
-    return path.replaceAll('\\', '/').replaceAll('/', '-');
+    return path;
 }
 
 function isAbsolutePath(path: string): boolean {
