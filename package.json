@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Cloudflare-native remote MCP server for durable coding conventions.",
+  "description": "Cloudflare-native Conventions MCP server for durable coding conventions.",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",

@@ -1,6 +1,6 @@
 # conventions-mcp-cloudflare
 
-Cloudflare-native remote companion to `conventions-mcp`.
+Cloudflare-native Conventions MCP server.
 
 It preserves the same durable-rule model and MCP tool names while using:
 
@@ -9,8 +9,9 @@ It preserves the same durable-rule model and MCP tool names while using:
 - Workers AI for embedding generation;
 - Vectorize for semantic search.
 
-This is intentionally a separate implementation. The local project remains
-the reference for hooks, stdio transport, SQLite, and local embeddings.
+This implementation is self-contained: its local client uses the Worker as
+the MCP server, with D1 as authoritative storage and Vectorize as the search
+index.
 
 ## Local setup
 
