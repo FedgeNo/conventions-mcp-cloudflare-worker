@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "conventions-mcp-cloudflare",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "conventions-mcp",
+      "database_id": "166d54f8-4c87-4e90-b7a4-d88610f31ba3"
+    }
+  ],
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "conventions-mcp"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "EMBEDDING_MODEL": "@cf/baai/bge-base-en-v1.5"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
