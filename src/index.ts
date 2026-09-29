@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { createMcpHandler } from 'agents/mcp/server';
 import { z } from 'zod';
 import { projectFromRequest } from './project';
+import { formatRules } from './rules';
 import { deleteThought, insertThought, listRules, listThoughts, searchThoughts, stats, updateThought } from './store';
 import type { Env, Thought, ThoughtType } from './types';
 
@@ -57,7 +58,7 @@ function createServer(env: Env, project: string | null) {
         inputSchema: {},
     }, async () => {
         const results = await listRules(env, project);
-        return { content: [{ type: 'text' as const, text: results.length ? results.map(text).join('\n') : 'No rules are stored for this scope.' }] };
+        return { content: [{ type: 'text' as const, text: formatRules(results) }] };
     });
     server.registerTool('list_thoughts', {
         description: 'List recent thoughts for explicit management and review.',
