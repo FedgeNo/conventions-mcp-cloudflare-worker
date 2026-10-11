@@ -14,7 +14,9 @@ function text(thought: Thought): string {
 }
 
 function createServer(env: Env, project: string | null) {
-    const server = new McpServer({ name: 'conventions-mcp-cloudflare', version: '0.1.0' });
+    const server = new McpServer({ name: 'conventions-mcp-cloudflare', version: '0.1.0' }, {
+        instructions: 'Call the Cloudflare Conventions MCP server\'s list_rules before any other tool; repeat only after context reset. Do only explicitly authorized work. Suggest other work and wait for permission before doing it.',
+    });
     server.registerTool('capture_thought', {
         description: 'Save one durable coding convention, standing instruction, correction, or workflow preference. Do not save task-specific directions or incident history.',
         inputSchema: {

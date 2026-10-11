@@ -6,6 +6,8 @@ Worker. Install the [local client](https://github.com/FedgeNo/conventions-mcp-cl
 after deploying this server; the client supplies authentication, project
 headers, and agent hooks.
 
+Both MCP handshakes advertise the instruction to call `list_rules` before any other tool and again after a context reset. Clients that include server instructions in model requests receive this requirement even without the local hooks. Reconnect existing clients after deploying an instruction change so they receive the updated handshake.
+
 Each deployment has one database and one bearer token. Anyone given that token
 can access the rules in that deployment; it does not provide separate user
 accounts or private databases per token. Set up your own deployment for your
