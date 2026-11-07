@@ -3,6 +3,22 @@ import worker from '../src/index';
 import type { Env } from '../src/types';
 
 describe('MCP handshake', () => {
+    it.each([undefined, ''])('rejects requests when the configured secret is %s', async (token) => {
+        const response = await worker.fetch(new Request('https://example.test/mcp', {
+            headers: { Authorization: 'Bearer test-token' },
+        }), { MCP_AUTH_TOKEN: token } as Env, {} as ExecutionContext);
+        expect(response.status).toBe(503);
+    });
+
+    it.each([undefined, 'Bearer wrong-token'])('rejects invalid authorization: %s', async (authorization) => {
+        const headers = new Headers();
+        if (authorization) headers.set('Authorization', authorization);
+        const response = await worker.fetch(new Request('https://example.test/mcp', {
+            headers,
+        }), { MCP_AUTH_TOKEN: 'test-token' } as Env, {} as ExecutionContext);
+        expect(response.status).toBe(401);
+    });
+
     it.each(['2025-11-25', '2026-07-28'])('delivers the rule-loading requirement on %s', async (version) => {
         const modern = version === '2026-07-28';
         const method = modern ? 'server/discover' : 'initialize';

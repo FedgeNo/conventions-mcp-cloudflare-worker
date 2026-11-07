@@ -78,10 +78,9 @@ function createServer(env: Env, project: string | null) {
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-        if (env.MCP_AUTH_TOKEN) {
-            const authorization = request.headers.get('authorization');
-            if (authorization !== `Bearer ${env.MCP_AUTH_TOKEN}`) return new Response('Unauthorized', { status: 401 });
-        }
+        if (!env.MCP_AUTH_TOKEN) return new Response('Service unavailable', { status: 503 });
+        const authorization = request.headers.get('authorization');
+        if (authorization !== `Bearer ${env.MCP_AUTH_TOKEN}`) return new Response('Unauthorized', { status: 401 });
         const handler = createMcpHandler((context) => {
             const project = context.requestInfo ? projectFromRequest(context.requestInfo) : null;
             return createServer(env, project);

@@ -13,6 +13,10 @@ can access the rules in that deployment; it does not provide separate user
 accounts or private databases per token. Set up your own deployment for your
 own rules.
 
+Authentication is required. The Worker returns HTTP 503 if `MCP_AUTH_TOKEN`
+is missing or empty, and HTTP 401 if a request does not supply the matching
+bearer token.
+
 ## Deploy your own server
 
 You need Node.js and npm, a Cloudflare account with Workers, D1, Vectorize,
